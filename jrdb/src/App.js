@@ -3,18 +3,27 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    toggle: true
+  } // Sets initial state on creation of our component to true
+
+  toggle = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    })
+  } // Defined method and changed state of toggle to opposite of current state
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Welcome text="Welcome to using props" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-            Learn React
-          </a>
+          {this.state.toggle && // Conditional statement checks to see if true AND outputs <p>
+            <p>This should show and hide</p>
+          }
+          <button onClick={this.toggle}>Show / Hide</button>
         </header>
       </div>
     );
