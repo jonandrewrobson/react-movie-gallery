@@ -19,6 +19,17 @@ const movies = [{
 // Iterating over movies. Array, mapping over it, taking each movie, and returning the movie component with the movies passed in. Loops over each movie and outputs a new component.
 
 class App extends Component {
+  // Grabbing API data from Movie DB asynchronously
+  async componentDidMount() {
+    try {
+      const result = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=ae9ff6163e6554769dfa773c041baa47&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
+      const movies = await result.json();
+      console.log(movies);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   render() {
     return (
       <div className="App">
