@@ -5,7 +5,8 @@ import Movie from './Movie'
 
 const movies = [{
   id: 1,
-  title: 'Dark City'
+  title: 'Dark City',
+  description: 'This is a description'
 }, {
   id: 2,
   title: 'Get Out'
@@ -15,6 +16,8 @@ const movies = [{
 }
 ];
 
+// Iterating over movies. Array, mapping over it, taking each movie, and returning the movie component with the movies passed in. Loops over each movie and outputs a new component.
+
 class App extends Component {
   render() {
     return (
@@ -22,9 +25,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        {movies.map(movie => (
-          <Movie key={movie.id} movie={movie} />
-        ))}
+        {movies.map(movie => <Movie key={movie.id} movie={movie} description={movie.description} />)}
       </div>
     );
   }
