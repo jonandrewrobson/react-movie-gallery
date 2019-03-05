@@ -4,10 +4,9 @@ import './App.css';
 import Movie from './Movie';
 
 class App extends Component {
-
   // Sets default state while data is being loaded
   state = {
-    movies: []
+    movies: [],
   }
 
   // Grabbing API data from Movie DB asynchronously
@@ -16,10 +15,9 @@ class App extends Component {
     try {
       const result = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=ae9ff6163e6554769dfa773c041baa47&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
       const movies = await result.json();
-      console.log(movies);
       this.setState({
-        movies: movies.results
-      })
+        movies: movies.results,
+      });
     } catch (e) {
       console.log(e);
     }
