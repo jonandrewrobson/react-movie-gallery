@@ -1,30 +1,25 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Movie from './Movie'
-
-const movies = [{
-  id: 1,
-  title: 'Dark City',
-  description: 'This is a description'
-}, {
-  id: 2,
-  title: 'Get Out'
-}, {
-  id: 3,
-  title: 'Men Who Stare At Goats'
-}
-];
-
-// Iterating over movies. Array, mapping over it, taking each movie, and returning the movie component with the movies passed in. Loops over each movie and outputs a new component.
+import Movie from './Movie';
 
 class App extends Component {
+
+  // Sets default state while data is being loaded
+  state = {
+    movies: []
+  }
+
   // Grabbing API data from Movie DB asynchronously
   async componentDidMount() {
+    // Try looks for the data and catch outputs errors if the data is unreturned
     try {
       const result = await fetch('https://api.themoviedb.org/3/discover/movie?api_key=ae9ff6163e6554769dfa773c041baa47&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1');
       const movies = await result.json();
       console.log(movies);
+      this.setState({
+        movies: movies.results
+      })
     } catch (e) {
       console.log(e);
     }
@@ -36,7 +31,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        {movies.map(movie => <Movie key={movie.id} movie={movie} description={movie.description} />)}
+        {this.state.movies.map(movie => <Movie key={movie.id} movie={movie} />)}
       </div>
     );
   }
