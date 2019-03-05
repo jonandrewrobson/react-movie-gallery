@@ -5,14 +5,18 @@ import './App.css';
 class App extends Component {
 
   state = {
-    toggle: true
-  } // Sets initial state on creation of our component to true
+    input: 'hello'
+  }
 
-  toggle = () => {
+  updateInput = (event) => {
     this.setState({
-      toggle: !this.state.toggle
+      input: event.target.value.trim() // Trim removes spaces
     })
-  } // Defined method and changed state of toggle to opposite of current state
+  } // This syntax allows to use this. when referring to component
+
+  submit = () => {
+    console.log(this.text.value);
+  } // Console logging the value of the input
 
   render() {
     return (
@@ -20,10 +24,10 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Welcome text="Welcome to using props" />
-          {this.state.toggle && // Conditional statement checks to see if true AND outputs <p>
-            <p>This should show and hide</p>
-          }
-          <button onClick={this.toggle}>Show / Hide</button>
+          <h3>{this.state.input}</h3>
+          <input type="text" onChange={this.updateInput} value={this.state.input} />
+          <input type="text" ref={(input) => this.text = input} />
+          <button onClick={this.submit}>Show Value</button>
         </header>
       </div>
     );
